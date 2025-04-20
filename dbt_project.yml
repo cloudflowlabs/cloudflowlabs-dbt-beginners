@@ -1,0 +1,44 @@
+config-version: 2
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organisation's
+# name or the intended use of these models
+name: 'cfl_dbt_project'
+version: '1.5'
+
+profile: 'default'
+
+# These configurations specify where dbt should look for different types of files.
+# The `source-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+
+source-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_modules"
+
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+models:
+  cfl_dbt_project:
+    +tags: cfl_dbt_project
+    cfl_store:
+      +tags: cfl_store
+      marts:
+        +tags: mart
+
+seeds:
+  cfl_dbt_project:
+    cfl_store:
+      +tags: cfl_store
+      +docs:
+        node_color: '#131121' # dark purple
